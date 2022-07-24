@@ -1,22 +1,17 @@
 package br.com.alura.programminglanguageapi.service;
 
+import br.com.alura.programminglanguageapi.dto.LanguagesDto;
 import br.com.alura.programminglanguageapi.entity.Language;
-import br.com.alura.programminglanguageapi.repository.LanguageRepository;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
-public class LanguageService {
+public interface LanguageService {
+    List<LanguagesDto> languages();
 
-    private final LanguageRepository repository;
+    Language saveLanguage(Language language);
 
-    public LanguageService(LanguageRepository repository) {
-        this.repository = repository;
-    }
+    Optional<Language> languageById(String id);
 
-    public Optional<List<Language>> getAllLanguages() {
-        return Optional.ofNullable(repository.findAll());
-    }
+    boolean deleteById(String id);
 }
