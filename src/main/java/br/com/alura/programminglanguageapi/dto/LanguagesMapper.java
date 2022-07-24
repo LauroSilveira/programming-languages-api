@@ -2,19 +2,19 @@ package br.com.alura.programminglanguageapi.dto;
 
 
 import br.com.alura.programminglanguageapi.entity.Language;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-@Mapper(componentModel = "spring")
-public interface LanguagesMapper {
+@Component
+public class LanguagesMapper {
+   public List<LanguageDto> mapperToListDto(List<Language> languages) {
+        return languages.stream().map(lang -> new LanguageDto(lang.getTitle(), lang.getImage(), lang.getRanking()))
+                .collect(Collectors.toList());
+    }
 
-    @Mapping(target = "name", source = "title")
-    @Mapping(target = "url", source = "image")
-    @Mapping(target = "position", source = "ranking")
-    List<LanguagesDto> entitiesToDto(List<Language> list);
-
-
-    LanguagesDto entitiesToDto(Language entity);
+    public LanguageDto mapperToDto(Language lang) {
+        return new LanguageDto(lang.getTitle(), lang.getImage(), lang.getRanking());
+    }
 }

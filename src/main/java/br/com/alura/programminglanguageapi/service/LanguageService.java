@@ -1,17 +1,19 @@
 package br.com.alura.programminglanguageapi.service;
 
-import br.com.alura.programminglanguageapi.dto.LanguagesDto;
+import br.com.alura.programminglanguageapi.dto.LanguageDto;
 import br.com.alura.programminglanguageapi.entity.Language;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface LanguageService {
-    List<LanguagesDto> languages();
+    List<LanguageDto> getLanguages();
 
-    Language saveLanguage(Language language);
+    LanguageDto saveLanguage(Language language);
 
-    Optional<Language> languageById(String id);
+    Optional<LanguageDto> getLanguageById(String id);
 
     boolean deleteById(String id);
+
+    Optional<LanguageDto> partialUpdate(String ranking, String id);
 }

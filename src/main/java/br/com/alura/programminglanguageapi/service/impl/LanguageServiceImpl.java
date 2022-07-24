@@ -1,14 +1,14 @@
 package br.com.alura.programminglanguageapi.service.impl;
 
-import br.com.alura.programminglanguageapi.dto.LanguagesDto;
+import br.com.alura.programminglanguageapi.dto.LanguageDto;
 import br.com.alura.programminglanguageapi.dto.LanguagesMapper;
 import br.com.alura.programminglanguageapi.entity.Language;
 import br.com.alura.programminglanguageapi.exception.PersistException;
 import br.com.alura.programminglanguageapi.repository.LanguageRepository;
 import br.com.alura.programminglanguageapi.service.LanguageService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,15 +25,16 @@ public class LanguageServiceImpl implements LanguageService {
     }
 
     @Override
-    public List<LanguagesDto> languages() {
+    public List<LanguageDto> getLanguages() {
         Optional<List<Language>> languages = Optional.of(repository.findAll());
-        return mapper.entitiesToDto(languages.get());
+     return languages.map(mapper::mapperToListDto).orElse(Collections.emptyList());
     }
 
     @Override
-    public Language saveLanguage(Language language) {
+    public LanguageDto saveLanguage(Language language) {
         try {
-            return repository.save(language);
+            Language lang = repository.save(language);
+            return mapper.mapperToDto(lang);
         } catch (PersistException e) {
             throw new PersistException("Error to persist entity", e.getCause());
         }
@@ -41,8 +42,9 @@ public class LanguageServiceImpl implements LanguageService {
     }
 
     @Override
-    public Optional<Language> languageById(String id) {
-        return repository.findById(id);
+    public Optional<LanguageDto> getLanguageById(String id) {
+        Optional<Language> language = repository.findById(id);
+        return language.map(mapper::mapperToDto);
     }
 
     @Override
@@ -52,6 +54,20 @@ public class LanguageServiceImpl implements LanguageService {
             return true;
         } catch (PersistException e) {
             throw new PersistException("Error to Delete entity", e.getCause());
+        }
+    }
+
+    @Override
+    public Optional<LanguageDto> partialUpdate(String ranking, String id) {
+        Optional<Language> language = repository.findById(id);
+        if(language.isPresent()) {
+            //update ranking
+            language.get().setRanking(ranking);
+            //persist entity and returns it updated
+            Language languageUpdated = repository.save(language.get());
+           return Optional.ofNullable(mapper.mapperToDto(languageUpdated));
+        }else {
+            return Optional.empty();
         }
     }
 }
