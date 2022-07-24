@@ -1,0 +1,7 @@
+spring:
+  devtools:
+    restart:
+      enabled: true
+  data:
+    mongodb:
+      uri: mongodb+srv://alura:<PASSWORD>@aluradb.oqouams.mongodb.net/aluradb?retryWrites=true&w=majority
