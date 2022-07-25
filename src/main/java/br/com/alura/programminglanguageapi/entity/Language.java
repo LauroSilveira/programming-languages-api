@@ -17,6 +17,12 @@ public class Language {
 
     }
 
+    public Language(String title, String image, String ranking) {
+        this.title = title;
+        this.image = image;
+        this.ranking = ranking;
+    }
+
     public String getId() {
         return id;
     }
@@ -54,7 +60,7 @@ public class Language {
     }
 
     public Language builder() {
-       final Language language = new Language();
+        final Language language = new Language();
         language.id = this.id;
         language.title = this.title;
         language.image = this.image;

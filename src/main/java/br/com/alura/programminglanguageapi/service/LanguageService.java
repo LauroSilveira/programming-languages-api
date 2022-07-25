@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface LanguageService {
     List<LanguageDto> getLanguages();
 
-    LanguageDto saveLanguage(Language language);
+    LanguageDto saveLanguage(LanguageDto language);
 
     Optional<LanguageDto> getLanguageById(String id);
 

@@ -10,9 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
-
 
 
 @RestController
@@ -33,13 +33,15 @@ public class LanguagesController {
         final List<LanguageDto> languages = service.getLanguages();
         if (languages.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }else {
-            return new ResponseEntity<>(languages, HttpStatus.OK);
+        } else {
+            //returns list sorted by field position
+            return new ResponseEntity<>(languages.stream().sorted(Comparator.comparing(LanguageDto::getPosition))
+                    .toList(), HttpStatus.OK);
         }
     }
 
     @PostMapping
-    public ResponseEntity<LanguageDto> saveLanguage(@RequestBody Language language) {
+    public ResponseEntity<LanguageDto> saveLanguage(@RequestBody LanguageDto language) {
         LOGGER.info("Request received to Save a Programming Language");
         LanguageDto languageSaved = service.saveLanguage(language);
         return new ResponseEntity<>(languageSaved, HttpStatus.CREATED);
@@ -53,7 +55,7 @@ public class LanguagesController {
         return languageDto.map(dto -> new ResponseEntity<>(dto, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/language/{id}")
     public ResponseEntity<LanguageDto> getLanguageById(@PathVariable String id) {
         LOGGER.info("Request received to get a Programming Language By Id {} ", id);
         Optional<LanguageDto> languageById = service.getLanguageById(id);
