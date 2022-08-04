@@ -5,3 +5,8 @@ spring:
   data:
     mongodb:
       uri:
+
+
+springdoc:
+  .swagger-ui:
+  path: /swagger-ui.html
