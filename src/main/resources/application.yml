@@ -6,7 +6,6 @@ spring:
     mongodb:
       uri: mongodb+srv://alura:mnkypl9IUBgIF3pK@aluradb.oqouams.mongodb.net/aluradb?retryWrites=true&w=majority
 
-
 springdoc:
   .swagger-ui:
   path: /swagger-ui.html
