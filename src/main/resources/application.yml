@@ -4,7 +4,7 @@ spring:
       enabled: true
   data:
     mongodb:
-      uri: mongodb+srv://alura:mnkypl9IUBgIF3pK@aluradb.oqouams.mongodb.net/aluradb?retryWrites=true&w=majority
+      uri: ENC(y+T4MmW6/ZOt9cqslK59vdvHLtfudgkGt38Dt79l0uhfkOnob4vM8VCfZO71jQ0p5FLwtTHzCIS+aA//D8sPu1P5gtESxsJ0/xNSFaK1V0PxPj/EYDbnfGyUwyAy79pLRUPBkOuevoxE0BJgSxLmPA5xHZl9ol58fUdnWHoHPAbKnVts8pStJC9hgSfrZ5Xn)
 
 springdoc:
   .swagger-ui:
