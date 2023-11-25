@@ -1,11 +1,17 @@
+server:
+  port: 8080
+
 spring:
-  devtools:
-    restart:
-      enabled: true
+  application:
+    name: programming-language-api
   data:
     mongodb:
       database: language-api
-      uri: ${DATABASE_PRO}
+      uri: ${DATABASE_PRO:mongodb+srv://laurosilveira:AuCatsHoTxGHRdYW@languagi-api.cp7sbjb.mongodb.net/?retryWrites=true&w=majority}
+
+  devtools:
+    restart:
+      enabled: true
 
 springdoc:
   swagger-ui:
