@@ -4,7 +4,8 @@ spring:
       enabled: true
   data:
     mongodb:
-      uri: mongodb+srv://alura:mnkypl9IUBgIF3pK@aluradb.oqouams.mongodb.net/aluradb?retryWrites=true&w=majority
+      database: language-api
+      uri: ${DATABASE_PRO:mongodb+srv://laurosilveira:AuCatsHoTxGHRdYW@languagi-api.cp7sbjb.mongodb.net/?retryWrites=true&w=majority}
 
 springdoc:
   swagger-ui:
